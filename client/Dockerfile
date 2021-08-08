@@ -1,8 +1,5 @@
 FROM node:14-alpine
 
-# need glibc
-RUN apk add --no-cache libc6-compat
-
 # Create app directory
 WORKDIR /app
 
@@ -20,8 +17,8 @@ COPY . .
 RUN yarn build
 
 ENV NODE_ENV production
-ENV PORT 4000
+ENV PORT 3000
 
-EXPOSE 4000
-CMD [ "node", "dist/index.js" ]
+EXPOSE 3000
+CMD [ "yarn", "start" ]
 USER node
