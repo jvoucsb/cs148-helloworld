@@ -1,14 +1,14 @@
 import { CloseIcon, ExternalLinkIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Box, Button, ButtonGroup, Flex, Heading, Link, Stack, useDisclosure
+  Box, Button, ButtonGroup, Flex, FlexProps, Heading, Link as StyledLink, Stack, useDisclosure
 } from "@chakra-ui/react";
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import Link from "next/link";
 import { useMeQuery } from "../generated/graphql";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import ProfileMenu from "./profiles/ProfileMenu";
 
-const Header: React.FC<{}> = (props) => {
+const Header: React.FC<FlexProps> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
   const { data, loading } = useMeQuery({ notifyOnNetworkStatusChange: true });
@@ -23,8 +23,8 @@ const Header: React.FC<{}> = (props) => {
       {...props}
     >
       <Flex align="center" mr={5}>
-        <Heading as={RouterLink} to="/" size="lg" letterSpacing={"tighter"}>
-          express-react
+        <Heading size="lg" letterSpacing={"tighter"}>
+          <Link href="/">express-react</Link>
         </Heading>
       </Flex>
 
@@ -40,9 +40,9 @@ const Header: React.FC<{}> = (props) => {
         flexGrow={1}
         mt={{ base: 4, md: 0 }}
       >
-        <Link href="https://chakra-ui.com" isExternal>
+        <StyledLink href="https://chakra-ui.com" isExternal>
           Chakra Docs <ExternalLinkIcon mx="2px" />
-        </Link>
+        </StyledLink>
       </Stack>
 
       <Box
@@ -52,19 +52,11 @@ const Header: React.FC<{}> = (props) => {
         {
           (loading || !data || !data.me) ? (
             <ButtonGroup variant="outline">
-              <Button
-                as={RouterLink}
-                to="/signup"
-                onClick={onClose}
-              >
-                Sign up
+              <Button onClick={onClose}>
+                <Link href="/signup">Sign up</Link>
               </Button>
-              <Button
-                as={RouterLink}
-                to="/login"
-                onClick={onClose}
-              >
-                Login
+              <Button onClick={onClose}>
+                <Link href="/login">Login</Link>
               </Button>
               <ColorModeSwitcher />
             </ButtonGroup>

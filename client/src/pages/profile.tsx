@@ -1,12 +1,12 @@
 import { Center, Spinner } from "@chakra-ui/react";
 import * as React from 'react';
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import ProfileCard from "../components/profiles/ProfileCard";
 import { useMeQuery } from '../generated/graphql';
 
 const Profile: React.FC<{}> = () => {
   const { data, loading } = useMeQuery();
-  const history = useHistory();
+  const router = useRouter();
 
   if (loading) {
     return (
@@ -19,7 +19,7 @@ const Profile: React.FC<{}> = () => {
   }
 
   if (!data || !data.me) {
-    history.push("/login");
+    router.push("/login");
 
     return (<div/>);
   }

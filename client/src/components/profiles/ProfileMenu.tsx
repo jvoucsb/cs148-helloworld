@@ -1,7 +1,8 @@
 import { useApolloClient } from "@apollo/client";
 import { Avatar, Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
 import * as React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from "next/router";
 import { useLogoutMutation, User } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
@@ -13,7 +14,7 @@ const ProfileMenu: React.FC<Props> = ({ user }) => {
 
   const [logout] = useLogoutMutation();
   const apolloClient = useApolloClient();
-  const history = useHistory();
+  const router = useRouter();
 
   return (
     <Menu
@@ -26,19 +27,18 @@ const ProfileMenu: React.FC<Props> = ({ user }) => {
         />
       </MenuButton>
       <MenuList>
-        <MenuItem
-          as={Link}
-          to="/profile"
-        >
-          Profile
-        </MenuItem>
+        <Link href="/profile">
+          <MenuItem>
+            Profile
+          </MenuItem>
+        </Link>
         <MenuDivider/>
         <MenuItem
           onClick={async () => {
             await logout();
             setAccessToken("");
             await apolloClient.cache.reset();
-            history.push("/");
+            router.push("/");
           }}
         >
           Logout

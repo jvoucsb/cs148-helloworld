@@ -1,14 +1,14 @@
 import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react';
 import { Field, Form, Formik } from "formik";
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { MeDocument, useLoginMutation, MeQuery } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
 const LoginForm: React.FC<{}> = () => {
   const [login] = useLoginMutation();
   const toast = useToast();
-  const history = useHistory();
+  const router = useRouter();
 
   return (
     <Formik
@@ -47,7 +47,7 @@ const LoginForm: React.FC<{}> = () => {
           });
         } else {
           setAccessToken(response.data.login.accessToken);
-          history.push("/profile");
+          router.push("/profile");
         }
 
         actions.setSubmitting(false);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Formik, Form, Field } from "formik";
 import { Button, FormControl, FormLabel, Input, FormErrorMessage, Checkbox, useToast } from '@chakra-ui/react';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { useRegisterMutation } from '../../generated/graphql';
 
 const SignupForm: React.FC<{}> = () => {
@@ -25,7 +25,7 @@ const SignupForm: React.FC<{}> = () => {
       .oneOf([true], 'You must agree to the terms and conditions')
   });
 
-  const history = useHistory();
+  const router = useRouter();
   const [register] = useRegisterMutation();
   const toast = useToast();
 
@@ -61,7 +61,7 @@ const SignupForm: React.FC<{}> = () => {
             duration: 5000
           });
         } else {
-          history.push("/login");
+          router.push("/login");
         }
 
         actions.setSubmitting(false);
