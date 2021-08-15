@@ -9,4 +9,4 @@ The frontend is React on nextjs. Can be deployed to vercel. Service is dockerize
 - deploy (using Docker or whatever)
 # notes
 - Building image `docker build --tag express-react-nextjs-frontend .`
-- Running container `docker run -p 4000:80 express-react-nextjs-frontend`
+- Running container `docker run -p 3000:3000 express-react-nextjs-frontend`

@@ -4,5 +4,5 @@ GraphQL, Postgres, and JWT authentication. Inspired by [this YouTube video](http
 # deployment
 Once again Docker!!! Using docker-compose to run multicontainers.
 - Read each README in `client` and `server` to set environment variables.
-- Run `docker-compose up`
-- Find service at `http://localhost:4000`
+- Run `docker-compose up --build`
+- Find service at `http://localhost:3000`

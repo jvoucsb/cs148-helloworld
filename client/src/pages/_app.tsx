@@ -1,6 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
-import { ChakraProvider, ColorModeScript, Stack, theme } from "@chakra-ui/react";
-import Header from "../components/Header";
+import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react";
 import Layout from "../components/Layout";
 import { useApollo } from "../utils/createApollo";
 

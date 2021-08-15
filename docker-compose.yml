@@ -3,7 +3,14 @@ services:
     build: ./client
     ports:
       - "3000:3000"
+    environment:
+      - BASE_API_URL=http://localhost:4000
   api:
     build: ./server
     ports:
       - "4000:4000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@host.docker.internal:5432/express-react
+      - CORS_ORIGIN=http://localhost:3000
+      - ACCESS_TOKEN_SECRET=superdupernotsecret
+      - REFRESH_TOKEN_SECRET=superdupernotsecret

@@ -9,7 +9,7 @@ Deploy AWS ECS cluster on EC2 behind an Application Load Balancer with Amazon RD
 - Run `npm run build`
 - Synthesize `cdk synth`
 - Bootstrap resources `cdk bootstrap aws://{account-id}/{region}`
-- `cdk deploy --all`
+- `cdk deploy --all --context accessTokenSecret=secretsecrethere --context refreshTokenSecret=secretsecrettoken`
 - Set up/edit Task environment variables `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET`
 - To destroy `cdk destroy --all`
 

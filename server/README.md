@@ -14,4 +14,4 @@ The app is also dockerized. Set any ENV variables in .env or Docker.
 - typeorm is on synchronize. In prod, this is not recommended; Use migrations instead.
 - Use `host.docker.internal` instead of `localhost` to communicate from the container to localhost service (ex. postgres)
 - Building image `docker build --tag express-react-nextjs-backend .`
-- Running container `docker run -p 4000:80 express-react-nextjs-backend`
+- Running container `docker run -p 4000:4000 express-react-nextjs-backend`
