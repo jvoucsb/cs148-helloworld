@@ -3,7 +3,9 @@ The frontend is React on nextjs. Can be deployed to vercel. Service is dockerize
 # development
 - change `.env.EXAMPLE` to `.env.local`. Change any values necessary
 - run `yarn dev`
-- # deployment
+- To run graphql generations, the backend server must be running to fetch the schemas. Then
+run `yarn gen`
+# deployment
 - create `.env.production.local`
 - set environment variables
 - deploy (using Docker or whatever)

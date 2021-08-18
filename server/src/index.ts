@@ -71,6 +71,8 @@ import path from "path";
     context: ({ req, res }) => ({ req, res }),
   });
 
+  await apolloServer.start();
+
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT, () => {
