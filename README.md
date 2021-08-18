@@ -12,7 +12,7 @@ Deploys application on AWS stack: VPC + Load balancer + ECS on EC2 + RDS on Post
 Charges will incur for AWS resources.
 - Follow instructions in CDK package to deploy stack
 # Heroku + Vercel deployment
-Backend service on heroku with frontend service on Vercel.
+Backend service on heroku with frontend service on Vercel. Also it's free*!
 ## Push server to Heroku
 Using Heroku CLI or Heroku website.
 
@@ -33,3 +33,11 @@ Now follow:
 - `heroku config:set REFRESH_TOKEN_SECRET=<secret here>`
 - `heroku config:set CORS_ORIGIN=<value>` (Vercel link, domain name, etc.)
 - `git push heroku master`
+## Push to vercel
+In client package
+- `yarn vercel` (follow instructions!)
+- Inspect vercel app in `preview` stage. Then set environment variable `NEXT_PUBLIC_BASE_API_URL` with heroku backend url
+- `yarn vercel --prod`
+- Remember to set `CORS_ORIGIN` in Heroku to vercel app url.
+## Pitfalls
+- Take care to not have trailing slash in URLs when settins `CORS` and `NEXT_PUBLIC_BASE_API_URL`

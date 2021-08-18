@@ -1,4 +1,4 @@
-import { ApolloClient, createHttpLink, from, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, createHttpLink, from, InMemoryCache } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwtDecode from "jwt-decode";
@@ -28,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-const tokenLink = new TokenRefreshLink({
+const tokenLink: any = new TokenRefreshLink({
   accessTokenField: "accessToken",
   isTokenValidOrUndefined: () => {
     const accessToken = getAccessToken();
