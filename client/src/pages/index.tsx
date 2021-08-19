@@ -26,7 +26,7 @@ const Home: React.FC<{}> = () => {
         direction={'column'}
         align={'center'}
       >
-        <Button as="a" href="https://github.com/jvogit/express-react" leftIcon={<FaGithub />}>
+        <Button as="a" href="https://github.com/jvogit/express-react-nextjs" leftIcon={<FaGithub />}>
           GitHub
         </Button>
       </Stack>
