@@ -52,12 +52,16 @@ const Header: React.FC<FlexProps> = (props) => {
         {
           (loading || !data || !data.me) ? (
             <ButtonGroup variant="outline">
-              <Button onClick={onClose}>
-                <Link href="/signup">Sign up</Link>
-              </Button>
-              <Button onClick={onClose}>
-                <Link href="/login">Login</Link>
-              </Button>
+              <Link href="/signup">
+                <Button onClick={onClose}>
+                  Sign up
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button onClick={onClose}>
+                  Login
+                </Button>
+              </Link>
               <ColorModeSwitcher />
             </ButtonGroup>
           ) : (
