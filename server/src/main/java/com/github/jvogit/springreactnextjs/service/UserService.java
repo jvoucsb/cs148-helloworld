@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -47,7 +46,6 @@ public class UserService {
         this.jwtConfigProperties = jwtConfigProperties;
     }
 
-    @Transactional
     public User createUser(final String username, final String email, final String password) {
         final String hashedPassword = passwordEncoder.encode(password);
         final User user = User.builder()
@@ -59,23 +57,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    @Transactional
     public Optional<User> getUser(final UUID id) {
         return userRepository.findById(id);
     }
 
-    @Transactional
     public Optional<User> getUserByUsernameOrEmail(final String usernameOrEmail) {
         return userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
     }
 
-    @Transactional
     public Optional<JwtUserDetails> getUserDetailsFromToken(final String token) {
         try {
             final DecodedJWT decoded = accessTokenVerifier.verify(token);
 
             final JwtUserDetails userDetails = JwtUserDetails.builder()
-                    .id(decoded.getClaim("user_id").asString())
+                    .id(decoded.getClaim("userId").asString())
                     .username(decoded.getSubject())
                     .build();
 
@@ -85,8 +80,7 @@ public class UserService {
         }
     }
 
-    @Transactional
-    public String generateJwtToken(final User user) {
+    public String generateAccessToken(final User user) {
         final Instant now = Instant.now();
         final Instant expires = Instant.now().plus(15, ChronoUnit.MINUTES);
 
@@ -95,7 +89,7 @@ public class UserService {
                 .withIssuedAt(Date.from(now))
                 .withExpiresAt(Date.from(expires))
                 .withSubject(user.getUsername())
-                .withClaim("user_id", user.getId().toString())
+                .withClaim("userId", user.getId().toString())
                 .sign(accessTokenAlgo);
     }
 }

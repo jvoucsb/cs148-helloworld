@@ -6,6 +6,7 @@ import com.github.jvogit.springreactnextjs.model.input.LoginInput;
 import com.github.jvogit.springreactnextjs.model.input.RegisterInput;
 import com.github.jvogit.springreactnextjs.model.response.LoginResponse;
 import com.github.jvogit.springreactnextjs.model.response.RegisterResponse;
+import com.github.jvogit.springreactnextjs.service.RefreshTokenService;
 import com.github.jvogit.springreactnextjs.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @GraphQlController
@@ -28,12 +30,20 @@ public class UserController {
 
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
+    private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
+    private HttpServletResponse response;
 
     @Autowired
-    public UserController(final UserService userService, final AuthenticationManager authenticationManager) {
+    public UserController(
+            final UserService userService,
+            final RefreshTokenService refreshTokenService,
+            final AuthenticationManager authenticationManager,
+            final HttpServletResponse response) {
         this.userService = userService;
+        this.refreshTokenService = refreshTokenService;
         this.authenticationManager = authenticationManager;
+        this.response = response;
     }
 
     @QueryMapping
@@ -64,11 +74,15 @@ public class UserController {
 
             final JwtUserDetails userDetails = (JwtUserDetails) auth.getPrincipal();
             final User user = userService.getUserByUsernameOrEmail(userDetails.getUsername()).get();
-            final String token = userService.generateJwtToken(user);
+            final String accessToken = userService.generateAccessToken(user);
+            final String refreshToken = refreshTokenService.generateRefreshToken(user);
+
+            // set jid cookie
+            refreshTokenService.setTokensResponse(response, accessToken, refreshToken);
 
             return new LoginResponse(
                     true,
-                    token,
+                    accessToken,
                     user
             );
         } catch (final BadCredentialsException ex) {

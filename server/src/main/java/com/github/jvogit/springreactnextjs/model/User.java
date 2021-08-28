@@ -1,6 +1,7 @@
 package com.github.jvogit.springreactnextjs.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,6 +25,10 @@ public class User {
     @Column
     @Size(min = 6)
     private String password;
+
+    @Column
+    @Min(1)
+    private int tokenVersion = 1;
 
     public User(final UUID id, final String username, final String email, final String password) {
         this.id = id;
@@ -65,6 +70,14 @@ public class User {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public int getTokenVersion() {
+        return tokenVersion;
+    }
+
+    public void setTokenVersion(int tokenVersion) {
+        this.tokenVersion = tokenVersion;
     }
 
     @Override

@@ -14,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -47,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(input ->
                 userService.getUserByUsernameOrEmail(input)
-                    .map(JwtUserDetails::from)
-                    .orElseThrow(() -> new UsernameNotFoundException("Username not found " + input))
+                        .map(JwtUserDetails::from)
+                        .orElseThrow(() -> new UsernameNotFoundException("Username not found " + input))
         );
     }
 
@@ -59,8 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                        .antMatchers("/graphql", "/graphiql").permitAll()
-                        .anyRequest().authenticated();
+                .antMatchers("/refresh_token").permitAll()
+                .antMatchers("/graphql", "/graphiql").permitAll()
+                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
