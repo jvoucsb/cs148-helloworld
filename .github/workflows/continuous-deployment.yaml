@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production_environment
-      url: https://express-react-nextjs.vercel.app/
+      url: https://spring-react-nextjs.vercel.app/
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
