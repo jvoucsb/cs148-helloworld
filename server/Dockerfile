@@ -14,4 +14,4 @@ USER spring:spring
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 ENV PORT 8080
 EXPOSE 8080
-ENTRYPOINT ["java", "-Dserver.port=$PORT", "-Dspring.profiles.active=production", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-Dspring.profiles.active=production", "-jar", "/app/app.jar"]
