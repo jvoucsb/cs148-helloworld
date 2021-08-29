@@ -1,14 +1,7 @@
-mutation Register ($options: RegisterInput!) {
+mutation Register ($input: RegisterInput!) {
   register(
-    options: $options
+    input: $input
   ) {
-    user {
-      id
-      username
-    }
-    errors {
-      field
-      message
-    }
+    success
   }
 }

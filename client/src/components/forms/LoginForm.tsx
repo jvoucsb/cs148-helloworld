@@ -21,8 +21,10 @@ const LoginForm: React.FC<{}> = () => {
 
         const response = await login({
           variables: {
-            usernameOrEmail: values.usernameOrEmail,
-            password: values.password,
+            input: {
+              usernameOrEmail: values.usernameOrEmail,
+              password: values.password,
+            }
           },
           update: (store, { data }) => {
             if (!data) return null;
@@ -36,17 +38,16 @@ const LoginForm: React.FC<{}> = () => {
           }
         });
 
-        if (!response.data || response.data.login.errors || !response.data.login.accessToken) {
-          console.log("errors", response.data?.login.errors);
+        if (!response.data || !response.data.login.token) {
           toast({
             title: "Error",
-            description: response.data?.login.errors?.map(e => e.message).join("\n"),
+            description: "An error occured.",
             status: "error",
             duration: 5000,
             isClosable: true,
           });
         } else {
-          setAccessToken(response.data.login.accessToken);
+          setAccessToken(response.data.login.token);
           router.push("/profile");
         }
 

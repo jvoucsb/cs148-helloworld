@@ -90,4 +90,9 @@ public class UserController {
             throw new BadCredentialsException("Bad credentials.");
         }
     }
+
+    @MutationMapping
+    public void logout() {
+        refreshTokenService.setTokensResponse(response, null, null);
+    }
 }

@@ -1,13 +1,10 @@
-mutation Login($usernameOrEmail: String!, $password: String!) {
-  login(usernameOrEmail: $usernameOrEmail, password: $password) {
-    errors {
-      field
-      message
-    }
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    success
     user {
       id
       username
     }
-    accessToken
+    token
   }
 }

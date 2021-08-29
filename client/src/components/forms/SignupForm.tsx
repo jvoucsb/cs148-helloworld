@@ -43,7 +43,7 @@ const SignupForm: React.FC<{}> = () => {
         console.log("submitted");
         const response = await register({
           variables: {
-            options: {
+            input: {
               username: values.username,
               email: values.email,
               password: values.password,
@@ -53,11 +53,10 @@ const SignupForm: React.FC<{}> = () => {
 
         console.log(response);
 
-        if (response.data?.register.errors) {
-          console.log("errors", response.data.register.errors);
+        if (!response.data?.register.success) {
           toast({
             status: "error",
-            description: response.data.register.errors.map(error => error.message).join("\n"),
+            description: "An error occured.",
             duration: 5000
           });
         } else {

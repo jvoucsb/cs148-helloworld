@@ -7,6 +7,7 @@ import com.github.jvogit.springreactnextjs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class RefreshTokenController {
         this.userService = userService;
     }
 
-    @GetMapping("/refresh_token")
+    @PostMapping("/refresh_token")
     public RefreshTokenResponse refreshToken(
             @CookieValue("jid") String refreshToken,
             final HttpServletResponse response
