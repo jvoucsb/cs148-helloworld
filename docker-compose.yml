@@ -4,13 +4,14 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - BASE_API_URL=http://localhost:4000
+      - BASE_API_URL=http://localhost:8080
   api:
     build: ./server
     ports:
-      - "4000:4000"
+      - "8080:8080"
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@host.docker.internal:5432/express-react
-      - CORS_ORIGIN=http://localhost:3000
+      - DATABASE_URL=postgres://postgres:postgres@host.docker.internal:5432/spring-react
       - ACCESS_TOKEN_SECRET=superdupernotsecret
       - REFRESH_TOKEN_SECRET=superdupernotsecret
+      - JWT_ISSUER=spring-react-nextjs
+      - CORS_ORIGIN=http://localhost:3000

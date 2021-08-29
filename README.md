@@ -28,10 +28,10 @@ Othwerise, please follow
 
 Now follow:
 - `heroku git:remote -a <appname>` (to set heroku remote in your local repo)
-- `heroku config:set PGSSLMODE=no-verify` (otherwise error will occur)
+- `heroku config:set PGSSLMODE=require` (use SSL for postgres)
 - `heroku config:set ACCESS_TOKEN_SECRET=<secret here>`
 - `heroku config:set REFRESH_TOKEN_SECRET=<secret here>`
-- `heroku config:set CORS_ORIGIN=<value>` (Vercel link, domain name, etc.)
+- `heroku config:set CORS_ORIGIN=<value>` (Vercel link, domain name, etc. For now put `http://localhost:3000`)
 - `git push heroku master`
 ## Push to vercel
 In client package
