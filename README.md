@@ -1,5 +1,5 @@
-# express-react-nextjs
-Fullstack web application template entirely in Typescript. Uses: Express, React,
+# spring-react-nextjs
+Fullstack web application template. Uses: Springboot, React on nextjs,
 GraphQL, Postgres, and JWT authentication. Inspired by [this YouTube video](https://www.youtube.com/watch?v=I6ypD7qv3Z8).
 # docker deployment
 Once again Docker!!! Using docker-compose to run multicontainers.
@@ -31,6 +31,7 @@ Now follow:
 - `heroku config:set PGSSLMODE=require` (use SSL for postgres)
 - `heroku config:set ACCESS_TOKEN_SECRET=<secret here>`
 - `heroku config:set REFRESH_TOKEN_SECRET=<secret here>`
+- `heroku config:set JWT_ISSUER=<issuer name>`
 - `heroku config:set CORS_ORIGIN=<value>` (Vercel link, domain name, etc. For now put `http://localhost:3000`)
 - `git push heroku master`
 ## Push to vercel
