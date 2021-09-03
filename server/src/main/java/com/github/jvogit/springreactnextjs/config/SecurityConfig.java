@@ -61,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/refresh_token").permitAll()
                 .antMatchers("/graphql", "/graphiql").permitAll()
                 .anyRequest().authenticated();

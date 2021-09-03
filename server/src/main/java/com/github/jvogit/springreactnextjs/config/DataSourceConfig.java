@@ -8,6 +8,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @Configuration
 public class DataSourceConfig {
@@ -19,8 +20,8 @@ public class DataSourceConfig {
         final String username = dbUri.getUserInfo().split(":")[0];
         final String password = dbUri.getUserInfo().split(":")[1];
         final String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() +
-                // Set PROD env var to enable ssl
-                (System.getenv("PGSSLMODE") != null ? "?sslmode=" + System.getenv("PGSSLMODE") : "");
+                // By default ssl is used. Set sslmode to disable to have http connections.
+                "?sslmode=" + (Optional.ofNullable(System.getenv("PGSSLMODE")).orElse("require"));
 
         return DataSourceBuilder.create()
                 .username(username)
