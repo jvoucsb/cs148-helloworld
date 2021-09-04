@@ -27,7 +27,7 @@ const Profile: React.FC<{}> = () => {
   return (
     <Center
       py={{ base: 20, md: 36 }}
-      maxW={{ base: "sm", md: "md" }}
+      maxW={{ base: "sm", md: "xl" }}
       width="full"
     >
       <ProfileCard user={data.me}/>

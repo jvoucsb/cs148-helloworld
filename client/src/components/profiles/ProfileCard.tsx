@@ -1,4 +1,4 @@
-import { Avatar, Heading, VStack } from '@chakra-ui/react';
+import { Avatar, Container, Heading, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { User } from '../../generated/graphql';
 
@@ -9,7 +9,6 @@ interface Props {
 const ProfileCard: React.FC<Props> = ({ user }) => {
   return (
     <VStack
-      maxW="960px"
       w="full"
       rounded={"xl"}
       spacing={6}
@@ -23,11 +22,13 @@ const ProfileCard: React.FC<Props> = ({ user }) => {
       <Heading>
         {user.username}
       </Heading>
-      <pre id="json" style={{ alignSelf: "flex-start", textAlign: "left", overflowX: "auto" }}>
-        {
-          JSON.stringify(user, null, 2)
-        }
-      </pre>
+      <Container maxW="100%">
+        <pre id="json" style={{ position: "relative", overflowX: "auto" }}>
+          {
+            JSON.stringify(user, null, 2)
+          }
+        </pre>
+      </Container>
     </VStack>
   );
 };
