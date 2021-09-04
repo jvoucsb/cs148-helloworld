@@ -78,7 +78,7 @@ public class UserController {
             final String refreshToken = refreshTokenService.generateRefreshToken(user);
 
             // set jid cookie
-            refreshTokenService.setTokensResponse(response, accessToken, refreshToken);
+            refreshTokenService.setRefreshTokenCookie(response, refreshToken);
 
             return new LoginResponse(
                     true,
@@ -87,12 +87,12 @@ public class UserController {
             );
         } catch (final BadCredentialsException ex) {
             log.error("Bad credentials");
-            throw new BadCredentialsException("Bad credentials.");
+            throw new BadCredentialsException("Bad credentials");
         }
     }
 
     @MutationMapping
     public void logout() {
-        refreshTokenService.setTokensResponse(response, null, null);
+        refreshTokenService.setRefreshTokenCookie(response, null);
     }
 }

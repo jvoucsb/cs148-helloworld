@@ -68,21 +68,12 @@ public class RefreshTokenService {
                 .sign(refreshTokenAlgo);
     }
 
-    public RefreshTokenResponse setTokensResponse(
-            final HttpServletResponse response,
-            final String accessToken,
-            final String refreshToken) {
+    public void setRefreshTokenCookie(final HttpServletResponse response, final String refreshToken) {
         final ResponseCookie jidCookie = refreshTokenCookie(refreshToken);
 
         // because javax Cookie does not support same-site attribute
         // must use addHeader instead of addCookie
         response.addHeader(HttpHeaders.SET_COOKIE, jidCookie.toString());
-
-
-        // set new access token
-        return RefreshTokenResponse.builder()
-                .accessToken(accessToken)
-                .build();
     }
 
     private ResponseCookie refreshTokenCookie(final String refreshToken) {

@@ -1,5 +1,7 @@
 package com.github.jvogit.springreactnextjs.model.response;
 
+import java.util.Objects;
+
 public class RefreshTokenResponse {
 
     private String accessToken;
@@ -18,6 +20,19 @@ public class RefreshTokenResponse {
 
     public static RefreshTokenResponse.Builder builder() {
         return new RefreshTokenResponse.Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RefreshTokenResponse that = (RefreshTokenResponse) o;
+        return Objects.equals(getAccessToken(), that.getAccessToken());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAccessToken());
     }
 
     public static class Builder {
