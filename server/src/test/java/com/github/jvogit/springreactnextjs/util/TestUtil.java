@@ -15,7 +15,7 @@ public final class TestUtil {
     public static final UUID TEST_ID = UUID.randomUUID();
     public static final String TEST_USERNAME = "testUsername";
     public static final String TEST_EMAIL = "testEmail";
-    public static final String TEST_PASSWORD = "testEmail";
+    public static final String TEST_PASSWORD = "testPassword";
     public static final int TEST_TOKEN_VERSION = 1;
     public static final String TEST_ISSUER = "testIssuer";
     public static final Algorithm TEST_REFRESH_TOKEN_ALGO = Algorithm.HMAC512("secretRefreshToken");
@@ -31,13 +31,16 @@ public final class TestUtil {
     }
 
     public static User mockUser() {
-        return User.builder()
+        final User mockUser = User.builder()
                 .id(TEST_ID)
                 .username(TEST_USERNAME)
                 .password(TEST_PASSWORD)
                 .email(TEST_EMAIL)
-                .tokenVersion(TEST_TOKEN_VERSION)
                 .build();
+
+        mockUser.setTokenVersion(TEST_TOKEN_VERSION);
+
+        return mockUser;
     }
 
     public static String generateMockRefreshToken() {
@@ -51,5 +54,18 @@ public final class TestUtil {
                 .withSubject(TEST_ID.toString())
                 .withClaim("tokenVersion", TEST_TOKEN_VERSION)
                 .sign(TEST_REFRESH_TOKEN_ALGO);
+    }
+
+    public static String generateMockAccessToken() {
+        final Instant now = Instant.now();
+        final Instant expires = Instant.now().plus(15, ChronoUnit.MINUTES);
+
+        return JWT.create()
+                .withIssuer(TEST_ISSUER)
+                .withIssuedAt(Date.from(now))
+                .withExpiresAt(Date.from(expires))
+                .withSubject(TEST_USERNAME)
+                .withClaim("userId", TEST_ID.toString())
+                .sign(TEST_ACCESS_TOKEN_ALGO);
     }
 }

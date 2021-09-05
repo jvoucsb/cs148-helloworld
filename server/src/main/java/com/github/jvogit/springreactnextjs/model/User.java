@@ -34,14 +34,12 @@ public class User {
             final UUID id,
             final String username,
             final String email,
-            final String password,
-            final int tokenVersion
+            final String password
     ) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.tokenVersion = tokenVersion;
     }
 
     public User() {
@@ -90,24 +88,25 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", tokenVersion=" + tokenVersion +
                 '}';
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return getId().equals(user.getId()) && getUsername().equals(user.getUsername()) && getEmail().equals(user.getEmail()) && getPassword().equals(user.getPassword());
+        return getTokenVersion() == user.getTokenVersion() && Objects.equals(getId(), user.getId()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUsername(), getEmail(), getPassword());
+        return Objects.hash(getId(), getUsername(), getEmail(), getPassword(), getTokenVersion());
     }
 
     public static User.Builder builder() {
@@ -120,7 +119,6 @@ public class User {
         private String username;
         private String email;
         private String password;
-        private int tokenVersion;
 
         public Builder id(final UUID id) {
             this.id = id;
@@ -142,13 +140,8 @@ public class User {
             return this;
         }
 
-        public Builder tokenVersion(final int tokenVersion) {
-            this.tokenVersion = tokenVersion;
-            return this;
-        }
-
         public User build() {
-            return new User(id, username, email, password, tokenVersion);
+            return new User(id, username, email, password);
         }
     }
 }

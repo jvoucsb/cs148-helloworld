@@ -57,8 +57,8 @@ public class UserController {
 
     @MutationMapping
     public RegisterResponse register(@Argument("input") final RegisterInput input) {
-         final User user = userService.createUser(input.username(), input.email(), input.password());
-         log.info("Created {}", user);
+        final User user = userService.createUser(input.username(), input.email(), input.password());
+        log.info("Created {}", user);
 
         return new RegisterResponse(true);
     }

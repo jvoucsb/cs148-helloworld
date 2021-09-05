@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan("com.github.jvogit.springreactnextjs.config")
 public class SpringReactNextjsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringReactNextjsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringReactNextjsApplication.class, args);
+    }
 }
