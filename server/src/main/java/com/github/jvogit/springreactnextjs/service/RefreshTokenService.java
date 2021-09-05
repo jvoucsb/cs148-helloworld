@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.github.jvogit.springreactnextjs.config.jwt.JwtConfigProperties;
 import com.github.jvogit.springreactnextjs.model.User;
-import com.github.jvogit.springreactnextjs.model.response.RefreshTokenResponse;
 import com.github.jvogit.springreactnextjs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

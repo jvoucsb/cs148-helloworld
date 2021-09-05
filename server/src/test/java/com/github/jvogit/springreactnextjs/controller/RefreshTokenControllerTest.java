@@ -11,8 +11,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
-import java.util.UUID;
 
+import static com.github.jvogit.springreactnextjs.util.TestUtil.generateMockRefreshToken;
+import static com.github.jvogit.springreactnextjs.util.TestUtil.mockUser;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,25 +34,20 @@ public class RefreshTokenControllerTest {
     @InjectMocks
     private RefreshTokenController refreshTokenController;
 
+    private static final String TEST_REFRESH_TOKEN = generateMockRefreshToken();
+
     @Test
     void refreshToken_regenerated() {
-        final User user = User.builder()
-                .id(UUID.randomUUID())
-                .username("testUsername")
-                .password("testPassword")
-                .email("testEmail")
-                .build();
-        final String testRefreshToken = "testRefreshToken";
-        final String expectedAccessToken = "testAccessToken";
+        final User mockUser = mockUser();
         final RefreshTokenResponse expectedResponse = RefreshTokenResponse.builder()
-                .accessToken(expectedAccessToken)
+                .accessToken(TEST_REFRESH_TOKEN)
                 .build();
 
-        when(userService.generateAccessToken(user)).thenReturn(expectedAccessToken);
-        when(refreshTokenService.verify(testRefreshToken)).thenReturn(Optional.of(user));
+        when(userService.generateAccessToken(mockUser)).thenReturn(TEST_REFRESH_TOKEN);
+        when(refreshTokenService.verify(TEST_REFRESH_TOKEN)).thenReturn(Optional.of(mockUser));
 
         final RefreshTokenResponse actualRefreshTokenResponse = refreshTokenController
-                .refreshToken(testRefreshToken);
+                .refreshToken(TEST_REFRESH_TOKEN);
 
         assertThat(actualRefreshTokenResponse, is(expectedResponse));
         verify(refreshTokenService, times(1)).setRefreshTokenCookie(any(), eq(null));
@@ -65,7 +61,7 @@ public class RefreshTokenControllerTest {
 
         when(refreshTokenService.verify(any())).thenReturn(Optional.empty());
 
-        final RefreshTokenResponse actualResponse = refreshTokenController.refreshToken("testRefreshToken");
+        final RefreshTokenResponse actualResponse = refreshTokenController.refreshToken(TEST_REFRESH_TOKEN);
 
         assertThat(actualResponse, is(expectedResponse));
         verify(refreshTokenService, times(1)).setRefreshTokenCookie(any(), eq(null));

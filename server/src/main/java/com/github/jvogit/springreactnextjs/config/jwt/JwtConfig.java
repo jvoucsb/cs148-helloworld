@@ -11,12 +11,12 @@ public class JwtConfig {
 
     @Bean
     public Algorithm accessTokenAlgo(final JwtConfigProperties properties) {
-        return Algorithm.HMAC256(properties.getAccessTokenSecret());
+        return Algorithm.HMAC512(properties.getAccessTokenSecret());
     }
 
     @Bean
     public Algorithm refreshTokenAlgo(final JwtConfigProperties properties) {
-        return Algorithm.HMAC256(properties.getRefreshTokenSecret());
+        return Algorithm.HMAC512(properties.getRefreshTokenSecret());
     }
 
     @Bean

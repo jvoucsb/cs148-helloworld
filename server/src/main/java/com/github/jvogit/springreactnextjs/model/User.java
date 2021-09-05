@@ -30,11 +30,18 @@ public class User {
     @Min(1)
     private int tokenVersion = 1;
 
-    public User(final UUID id, final String username, final String email, final String password) {
+    public User(
+            final UUID id,
+            final String username,
+            final String email,
+            final String password,
+            final int tokenVersion
+    ) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.tokenVersion = tokenVersion;
     }
 
     public User() {
@@ -113,6 +120,7 @@ public class User {
         private String username;
         private String email;
         private String password;
+        private int tokenVersion;
 
         public Builder id(final UUID id) {
             this.id = id;
@@ -134,8 +142,13 @@ public class User {
             return this;
         }
 
+        public Builder tokenVersion(final int tokenVersion) {
+            this.tokenVersion = tokenVersion;
+            return this;
+        }
+
         public User build() {
-            return new User(id, username, email, password);
+            return new User(id, username, email, password, tokenVersion);
         }
     }
 }
