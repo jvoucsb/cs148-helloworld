@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/refresh_token").permitAll()
                 .antMatchers("/graphql", "/graphiql").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().denyAll();
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
