@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -88,7 +88,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -100,13 +102,14 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         User user = (User) o;
         return getTokenVersion() == user.getTokenVersion() && Objects.equals(getId(), user.getId()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPassword(), user.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUsername(), getEmail(), getPassword(), getTokenVersion());
+        return Objects.hash(super.hashCode(), getId(), getUsername(), getEmail(), getPassword(), getTokenVersion());
     }
 
     public static User.Builder builder() {
