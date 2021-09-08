@@ -70,7 +70,7 @@ public class UserService {
             final DecodedJWT decoded = accessTokenVerifier.verify(token);
 
             final JwtUserDetails userDetails = JwtUserDetails.builder()
-                    .id(decoded.getClaim("userId").asString())
+                    .id(UUID.fromString(decoded.getClaim("userId").asString()))
                     .username(decoded.getSubject())
                     .build();
 

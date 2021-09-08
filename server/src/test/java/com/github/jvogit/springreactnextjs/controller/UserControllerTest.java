@@ -82,7 +82,7 @@ public class UserControllerTest {
     void login_happy(final String usernameOrEmail) {
         final User mockUser = mockUser();
         final JwtUserDetails jwtUserDetails = JwtUserDetails.builder()
-                .id(TEST_ID.toString())
+                .id(TEST_ID)
                 .username(TEST_USERNAME)
                 .password(TEST_PASSWORD)
                 .build();
@@ -127,7 +127,7 @@ public class UserControllerTest {
     private void mockAuthenticationPrincipal() {
         final JwtUserDetails mockJwtUserDetails = JwtUserDetails.builder()
                 .username(TEST_USERNAME)
-                .id(TEST_ID.toString())
+                .id(TEST_ID)
                 .build();
         final Authentication auth = mock(Authentication.class);
         when(auth.getPrincipal()).thenReturn(mockJwtUserDetails);

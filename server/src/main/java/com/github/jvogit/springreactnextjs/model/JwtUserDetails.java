@@ -6,16 +6,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.UUID;
 
 public class JwtUserDetails implements UserDetails {
 
-    private final String id;
+    private final UUID id;
     private final String username;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
     public JwtUserDetails(
-            final String id,
+            final UUID id,
             final String username,
             final String password,
             final Collection<? extends GrantedAuthority> authorities
@@ -61,7 +62,7 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -80,6 +81,7 @@ public class JwtUserDetails implements UserDetails {
 
     public static JwtUserDetails from(final User user) {
         return JwtUserDetails.builder()
+                .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .authorities(Collections.emptyList())
@@ -92,12 +94,12 @@ public class JwtUserDetails implements UserDetails {
 
     public static class Builder {
 
-        private String id;
+        private UUID id;
         private String username;
         private String password;
         private Collection<? extends GrantedAuthority> authorities;
 
-        public Builder id(String id) {
+        public Builder id(UUID id) {
             this.id = id;
             return this;
         }

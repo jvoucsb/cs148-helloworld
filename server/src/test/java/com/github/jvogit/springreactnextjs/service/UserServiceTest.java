@@ -107,7 +107,7 @@ public class UserServiceTest {
     @Test
     void getUserDetailsFromToken_happy() {
         final JwtUserDetails expectedUserDetails = JwtUserDetails.builder()
-                .id(TEST_ID.toString())
+                .id(TEST_ID)
                 .username(TEST_USERNAME)
                 .build();
 

@@ -51,7 +51,7 @@ public class UserController {
     public User me() {
         JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        return userService.getUser(UUID.fromString(userDetails.getId()))
+        return userService.getUser(userDetails.getId())
                 .orElseThrow(() -> new RuntimeException("Can't find user."));
     }
 
