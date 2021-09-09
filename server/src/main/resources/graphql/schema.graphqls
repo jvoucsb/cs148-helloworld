@@ -1,6 +1,10 @@
+scalar DateTime
+
 type User {
     id: ID!
     username: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 input RegisterInput {
