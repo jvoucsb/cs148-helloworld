@@ -39,8 +39,8 @@ const tokenLink: any = new TokenRefreshLink({
 
     try {
       const { exp } = jwtDecode(accessToken) as any;
-
-      if (Date.now() >= exp * 1000) {
+      
+      if (Date.now() >= (exp * 1000) - (5*60*1000)) {
         // expired
         return false;
       }
@@ -62,7 +62,6 @@ const tokenLink: any = new TokenRefreshLink({
   handleError: err => {
     // full control over handling token fetch Error
     console.warn('Your refresh token is invalid. Try to relogin');
-    console.error(err);
   }
 });
 
