@@ -1,32 +1,17 @@
 import {
   ChakraProvider,
-  cookieStorageManager,
-  localStorageManager,
-  theme
+  ColorModeScript
 } from "@chakra-ui/react";
+import theme from "./Theme";
 
-export const Chakra = ({ cookies, children }) => {
-  // b) Pass `colorModeManager` prop
-  const colorModeManager =
-    typeof cookies === "string"
-      ? cookieStorageManager(cookies)
-      : localStorageManager
+export const Chakra = ({ children }) => {
+
   return (
-    <ChakraProvider colorModeManager={colorModeManager} theme={theme}>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
       {children}
     </ChakraProvider>
   )
-}
-
-// also export a reusable function getServerSideProps
-export const getServerSideProps = ({ req }) => {
-  return {
-    props: {
-      // first time users will not have any cookies and you may not return
-      // undefined here, hence ?? is necessary
-      cookies: req.headers.cookie ?? "",
-    },
-  }
 }
 
 export default Chakra;

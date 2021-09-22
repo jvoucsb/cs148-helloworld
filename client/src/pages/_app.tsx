@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Chakra cookies={pageProps.cookies}>
+      <Chakra>
         <Layout>
           <Component {...pageProps} />
         </Layout>
@@ -17,5 +17,3 @@ export default function App({ Component, pageProps }) {
     </ApolloProvider>
   );
 }
-
-export { getServerSideProps } from "../components/Chakra";
