@@ -2,16 +2,19 @@ import { CloseIcon, ExternalLinkIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box, Button, ButtonGroup, Flex, FlexProps, Heading, Link as StyledLink, Stack, useDisclosure
 } from "@chakra-ui/react";
-import React from "react";
 import Link from "next/link";
-import { useMeQuery } from "../generated/graphql";
+import React from "react";
+import { User } from "../generated/graphql";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import ProfileMenu from "./profiles/ProfileMenu";
 
-const Header: React.FC<FlexProps> = (props) => {
+interface HeaderProps extends FlexProps {
+  user?: Pick<User, 'id' | 'username'>
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
-  const { data, loading } = useMeQuery({ notifyOnNetworkStatusChange: true });
 
   return (
     <Flex
@@ -50,7 +53,7 @@ const Header: React.FC<FlexProps> = (props) => {
         mt={{ base: 4, md: 0 }}
       >
         {
-          (loading || !data || !data.me) ? (
+          !props.user ? (
             <ButtonGroup variant="outline">
               <Link href="/signup">
                 <Button onClick={onClose}>
@@ -67,7 +70,7 @@ const Header: React.FC<FlexProps> = (props) => {
           ) : (
             <ButtonGroup>
               <ColorModeSwitcher />
-              <ProfileMenu user={data.me} />
+              <ProfileMenu user={props.user} />
             </ButtonGroup>
           )
         }
