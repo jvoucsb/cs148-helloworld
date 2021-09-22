@@ -1,5 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
-import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react";
+import React from "react";
+import Chakra from "../components/Chakra";
 import Layout from "../components/Layout";
 import { useApollo } from "../utils/createApollo";
 
@@ -8,12 +9,13 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript />
+      <Chakra cookies={pageProps.cookies}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </ChakraProvider>
+      </Chakra>
     </ApolloProvider>
   );
 }
+
+export { getServerSideProps } from "../components/Chakra";
