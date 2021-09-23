@@ -25,6 +25,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+import static com.github.jvogit.springreactnextjs.util.AuthUtil.getUserDetails;
+
 @GraphQlController
 public class UserController {
 
@@ -49,8 +51,8 @@ public class UserController {
     @QueryMapping
     @PreAuthorize("isAuthenticated()")
     public User me() {
-        JwtUserDetails userDetails = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        JwtUserDetails userDetails = getUserDetails();
+
         return userService.getUser(userDetails.getId())
                 .orElseThrow(() -> new RuntimeException("Can't find user."));
     }
