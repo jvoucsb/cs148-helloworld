@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.GraphQlController;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,21 +19,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 import static com.github.jvogit.springreactnextjs.util.AuthUtil.getUserDetails;
 
-@GraphQlController
+@Controller
 public class UserController {
 
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
-    private HttpServletResponse response;
+    private final HttpServletResponse response;
 
     @Autowired
     public UserController(

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
@@ -86,6 +87,7 @@ public class RefreshTokenService {
                 // needs third party cookies to be enabled in browsers
                 .sameSite("None")
                 .secure(true)
+                .maxAge(Duration.ofDays(7))
                 .build();
     }
 }
