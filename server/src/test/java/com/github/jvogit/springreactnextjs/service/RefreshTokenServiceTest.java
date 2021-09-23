@@ -129,6 +129,7 @@ public class RefreshTokenServiceTest {
                 // needs third party cookies to be enabled in browsers
                 .sameSite("None")
                 .secure(true)
+                .maxAge(Duration.ofDays(7))
                 .build()
                 .toString();
     }
