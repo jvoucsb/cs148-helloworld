@@ -44,10 +44,6 @@ public class UserServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
-    private final Algorithm algo = TEST_ACCESS_TOKEN_ALGO;
-
-    private final JWTVerifier jwtVerifier = TEST_ACCESS_TOKEN_VERIFIER;
-
     @Mock
     private JwtConfigProperties jwtConfigProperties;
 
@@ -97,7 +93,7 @@ public class UserServiceTest {
     void getUserByUsernameOrEmail_happy(final String usernameOrEmail) {
         final User mockUser = mockUser();
 
-        when(userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)).thenReturn(Optional.of(mockUser));
+        when(userRepository.findByUsernameIgnoreCaseOrEmailIgnoreCase(usernameOrEmail, usernameOrEmail)).thenReturn(Optional.of(mockUser));
 
         final Optional<User> actual = userService.getUserByUsernameOrEmail(usernameOrEmail);
 
