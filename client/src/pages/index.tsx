@@ -14,19 +14,16 @@ const Home: React.FC<{}> = () => {
       maxW="3xl"
     >
       <Heading>
-        spring-react-nextjs
+        cs148-helloworld
       </Heading>
       <Text>
-        spring-react-nextjs is my template for a fullstack web app using Springboot,
-        Postgres, GraphQL, and Nextjs/React. Inspired by this{" "}
-        <Link color="teal.500" href="https://www.youtube.com/watch?v=I6ypD7qv3Z8" isExternal>Youtube Video</Link>.
-        Check out GitHub repo below!
+        This is my hello world web app for cs148 animelist team.
       </Text>
       <Stack
         direction={'column'}
         align={'center'}
       >
-        <Button as="a" href="https://github.com/jvogit/spring-react-nextjs" leftIcon={<FaGithub />}>
+        <Button as="a" href="https://github.com/jvoucsb/cs148-helloworld" leftIcon={<FaGithub />}>
           GitHub
         </Button>
       </Stack>
