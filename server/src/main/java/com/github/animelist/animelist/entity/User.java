@@ -1,4 +1,7 @@
-package com.github.animelist.animelist.model;
+package com.github.animelist.animelist.entity;
+
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

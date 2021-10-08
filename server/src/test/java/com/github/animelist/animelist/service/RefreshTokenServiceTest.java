@@ -2,7 +2,7 @@ package com.github.animelist.animelist.service;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.github.animelist.animelist.config.jwt.JwtConfigProperties;
-import com.github.animelist.animelist.model.User;
+import com.github.animelist.animelist.entity.User;
 import com.github.animelist.animelist.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

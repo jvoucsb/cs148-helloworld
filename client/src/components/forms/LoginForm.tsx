@@ -1,10 +1,11 @@
-import { ApolloError } from '@apollo/client';
-import { Button, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react';
+import { ApolloError, ApolloQueryResult } from '@apollo/client';
+import { Button, ButtonGroup, FormControl, FormLabel, Input, useToast } from '@chakra-ui/react';
 import { useFormik } from "formik";
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
+import { MalLoginOauthDocument, MalLoginOauthQuery, MeDocument, MeQuery, useLoginMutation } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
+import useImperativeQuery from '../../utils/useImperativeQuery';
 
 const LoginForm: React.FC<{}> = () => {
   const [login] = useLoginMutation();
@@ -58,6 +59,7 @@ const LoginForm: React.FC<{}> = () => {
   });
   const toast = useToast();
   const router = useRouter();
+  const malOauth = useImperativeQuery(MalLoginOauthDocument);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -69,9 +71,17 @@ const LoginForm: React.FC<{}> = () => {
         <FormLabel htmlFor="password">Password</FormLabel>
         <Input id="password" {...formik.getFieldProps("password")} placeholder="Password" type="password" />
       </FormControl>
-      <Button mt={6} type="submit" isLoading={formik.isSubmitting}>
-        Login
-      </Button>
+      <ButtonGroup mt={6}>
+        <Button onClick={async () => {
+          const { data }: ApolloQueryResult<MalLoginOauthQuery> = await malOauth();
+          window.location.href = data.malLoginOauth;
+        }}>
+          Login with MAL
+        </Button>
+        <Button type="submit" isLoading={formik.isSubmitting}>
+          Login
+        </Button>
+      </ButtonGroup>
     </form>
   );
 };

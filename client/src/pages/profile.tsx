@@ -1,14 +1,17 @@
-import { Center, Spinner } from "@chakra-ui/react";
+import { Button, Center, Spinner, VStack } from "@chakra-ui/react";
 import * as React from 'react';
 import { useRouter } from "next/router";
 import ProfileCard from "../components/profiles/ProfileCard";
-import { useMeQuery } from '../generated/graphql';
+import { MalLinkOauthDocument, MalLinkOauthQuery, useMeQuery } from '../generated/graphql';
+import useImperativeQuery from "../utils/useImperativeQuery";
+import { ApolloQueryResult } from "@apollo/client";
 
 const Profile: React.FC<{}> = () => {
   const { data, loading } = useMeQuery();
+  const malOauth = useImperativeQuery(MalLinkOauthDocument);
   const router = useRouter();
 
-  if (loading) {
+  if (loading) { 
     return (
       <Center
         flexGrow={1}
@@ -21,7 +24,7 @@ const Profile: React.FC<{}> = () => {
   if (!data || !data.me) {
     router.push("/login");
 
-    return (<div/>);
+    return (<div />);
   }
 
   return (
@@ -30,7 +33,15 @@ const Profile: React.FC<{}> = () => {
       maxW={{ base: "sm", md: "xl" }}
       width="full"
     >
-      <ProfileCard user={data.me}/>
+      <VStack>
+        <ProfileCard user={data.me} />
+        <Button onClick={async () => {
+          const { data }: ApolloQueryResult<MalLinkOauthQuery> = await malOauth();
+          window.location.href = data.malLinkOauth;
+        }}>
+          Link MAL
+        </Button>
+      </VStack>
     </Center>
   );
 };

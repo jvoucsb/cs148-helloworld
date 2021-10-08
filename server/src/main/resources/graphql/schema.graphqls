@@ -28,12 +28,21 @@ type LoginResponse {
     user: User!
 }
 
+input MALOauthInput {
+    code: String!
+    state: String!
+}
+
 type Query {
     me: User
+    malLinkOauth: String!
+    malLoginOauth:  String!
 }
 
 type Mutation {
     register(input: RegisterInput!): RegisterResponse
     login(input: LoginInput!): LoginResponse
+    malLogin(input: MALOauthInput!): LoginResponse
     logout: Boolean
+    malLink(input: MALOauthInput!): Boolean
 }

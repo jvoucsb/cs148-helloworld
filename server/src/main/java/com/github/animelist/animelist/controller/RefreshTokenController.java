@@ -1,6 +1,6 @@
 package com.github.animelist.animelist.controller;
 
-import com.github.animelist.animelist.model.User;
+import com.github.animelist.animelist.entity.User;
 import com.github.animelist.animelist.model.response.RefreshTokenResponse;
 import com.github.animelist.animelist.service.RefreshTokenService;
 import com.github.animelist.animelist.service.UserService;

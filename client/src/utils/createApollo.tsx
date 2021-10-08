@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloLink, createHttpLink, from, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, createHttpLink, from, InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwtDecode from "jwt-decode";
@@ -74,7 +74,7 @@ function createApolloClient() {
 }
 
 export function initializeApollo(initialState = null) {
-  const _apolloClient = apolloClient ?? createApolloClient()
+  const _apolloClient: ApolloClient<NormalizedCacheObject> = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here

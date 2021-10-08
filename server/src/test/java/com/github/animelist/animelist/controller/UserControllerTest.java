@@ -1,7 +1,7 @@
 package com.github.animelist.animelist.controller;
 
 import com.github.animelist.animelist.model.JwtUserDetails;
-import com.github.animelist.animelist.model.User;
+import com.github.animelist.animelist.entity.User;
 import com.github.animelist.animelist.model.input.LoginInput;
 import com.github.animelist.animelist.model.input.RegisterInput;
 import com.github.animelist.animelist.model.response.LoginResponse;

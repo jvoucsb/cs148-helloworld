@@ -7,7 +7,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.github.animelist.animelist.repository.UserRepository;
 import com.github.animelist.animelist.config.jwt.JwtConfigProperties;
-import com.github.animelist.animelist.model.User;
+import com.github.animelist.animelist.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;

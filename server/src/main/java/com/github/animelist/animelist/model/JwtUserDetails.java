@@ -1,5 +1,6 @@
 package com.github.animelist.animelist.model;
 
+import com.github.animelist.animelist.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

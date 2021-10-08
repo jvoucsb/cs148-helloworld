@@ -1,4 +1,4 @@
-package com.github.animelist.animelist.model;
+package com.github.animelist.animelist.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

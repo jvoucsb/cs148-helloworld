@@ -3,7 +3,7 @@ package com.github.animelist.animelist.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.github.animelist.animelist.model.User;
+import com.github.animelist.animelist.entity.User;
 
 import java.sql.Date;
 import java.time.Instant;
