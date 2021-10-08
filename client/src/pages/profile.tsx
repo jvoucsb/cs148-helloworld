@@ -33,7 +33,7 @@ const Profile: React.FC<{}> = () => {
       maxW={{ base: "sm", md: "xl" }}
       width="full"
     >
-      <VStack>
+      <VStack width="full">
         <ProfileCard user={data.me} />
         <Button onClick={async () => {
           const { data }: ApolloQueryResult<MalLinkOauthQuery> = await malOauth();
